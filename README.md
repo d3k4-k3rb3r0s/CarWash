@@ -1,10 +1,14 @@
 # CarWash 1.0.0
-WARNING: This script is so bad it needs serious cleaning up and refactoring, but it does work consistently as is so I am sharing it for the purposes of collaboration at this point. I will continue fixing and developing as time goes.
+WARNING: This script is so bad it needs serious cleaning up and refactoring, but it does work consistently as is so I am sharing it for the purposes of collaboration at this point. I will continue fixing and developing as time goes. It does not even have an entry point yet.
 
 WHat is it:
 Tool to automate Wash>Reaver pixiedust workflow with cyberpunk themed output.
 
 run > determine interface > run wash and sort by signal strength > run reaver in descending order > ave successfuly recovered pin & psk to csv
+
+Requirements:
+Reaver (preferrably the t6x)
+Click library
 
 Credit:
 Original Credit for Wash and Reaver go to Craig Heffner.
