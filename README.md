@@ -1,10 +1,10 @@
 # CarWash 1.0.0
 WARNING: This script is so bad it needs serious cleaning up and refactoring, but it does work consistently as is so I am sharing it for the purposes of collaboration at this point. I will continue fixing and developing as time goes. It does not even have an entry point yet.
 
-WHat is it:
+What is it:
 Tool to automate Wash>Reaver pixiedust workflow with cyberpunk themed output.
 
-run > determine interface > run wash and sort by signal strength > run reaver in descending order > ave successfuly recovered pin & psk to csv
+run > determine interface > run wash and sort by signal strength > run reaver in descending order > write successfully recovered pin & psk to csv
 
 Requirements:
 Reaver (preferrably the t6x)
@@ -27,7 +27,7 @@ This was what I would test my script against to verify the legitimacy of what is
 
 In two days of stopping by random parking lots, with my pi400 cyberdeck, equipped with a super basic 2.4g Alfa adapter I obtained over 50 cleartext PSK's. Mind you, this is ONLY pixiedust. No three foot long reaver commands to work against super specific AP's, no " " pin trick... just rolling and reaving with pixie-dust. 
 
-I reported my finding in various places across the interwebz and more or less got told I was an idiot or lying. By all means, take the newer moree fleshed out CarWash for a spin, and let me know what you find. 
+I reported my finding in various places across the interwebz and more or less got told I was an idiot or lying in most places. By all means, take the newer more fleshed out CarWash for a spin, and let me know what you find. 
 
 Anyone interested in helping develop CarWash can reach out to me here or on discord. Discord = "butlerian jihadist".
 
