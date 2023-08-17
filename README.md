@@ -1,4 +1,4 @@
-# CarWash 1.0.0
+# CarWash 1.0.1
 WARNING: This script is so bad it needs serious cleaning up and refactoring, but it does work consistently as is so I am sharing it for the purposes of collaboration at this point. I will continue fixing and developing as time goes. It does not even have an entry point yet.
 
 What is it:
