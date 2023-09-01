@@ -21,14 +21,6 @@ I have been told that the WPS attack vector is more or less dead. While experime
 
 I wrote a quick and dirty script to automate the Wash>Reaver workflow to start.
 
-Then I rolled around for a week and a half with a pwnagotchi until I had approx. 1200 hashes. Ran hashcat against them with various lists and methods.. obtained about 35 PSK's. 
-
-This was what I would test my script against to verify the legitimacy of what is commonly taught: "The only way to really hack wifi is by handshake capture or a pmkid attack, nothing is susceptible to WPS attacks anymore." 
-
-In two days of stopping by random parking lots, with my pi400 cyberdeck, equipped with a super basic 2.4g Alfa adapter I obtained over 50 cleartext PSK's. Mind you, this is ONLY pixiedust. No three foot long reaver commands to work against super specific AP's, no " " pin trick... just rolling and reaving with pixie-dust. 
-
-I reported my finding in various places across the interwebz and more or less got told I was an idiot or lying in most places. By all means, take the newer more fleshed out CarWash for a spin, and let me know what you find. 
-
 Anyone interested in helping develop CarWash can reach out to me here or on discord. Discord = "butlerian jihadist".
 
 Usage: As I said above this script is very under dveloped. It only takes one flag, being -i for interface. If you ignore this flag it will prompt you, and will also run the airmon-ng method of setting monitor mode. KeyboardInterrupt will skip an AP during the reaver process.
