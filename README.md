@@ -1,5 +1,8 @@
 # [CarWash]:
-WARNING: Mostly untested beyond raspbian.  I will continue fixing and developing as time goes. It does not even have an entry point yet. Bear with me, I have a passion for scripting and for radio hacking, but I am learning python with this project more or less. 
+WARNING: Mostly untested beyond raspbian.  I will continue fixing and developing as time goes. Bear with me, I have a passion for scripting and for radio hacking,
+but I am learning python with this project more or less. 
+
+![carwashcar](ascii_car.jpg)
 
 [What is it]:
 Research/RedTeamers tool to automate the Wash>Reaver(pixiedust)>* workflow with cyberpunk themed output. It's Fun. I'm old-school and love aesthetic, interactive console tools. 
