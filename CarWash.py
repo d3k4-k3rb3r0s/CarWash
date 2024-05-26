@@ -246,7 +246,7 @@ def open_tool():
     
     while True:
         time.sleep(.5)
-        reply = click.prompt("\n[?]:[Choose your weapon wisely:]\n\n[1]:[bettercap]\n[2]:[wifiphisher]\n[3]:[pyphisher]\n[4]:[wifipumpkin3]\n[5]:[routersploit]\n[6]:[beef]\n[7]:[...]\n[8]:[...]\n[9]:[...]\n[10]:[...]\n\n[x]:[Exit]\n").lower()
+        reply = click.prompt("\n[?]:[Choose your weapon wisely:]\n\n[1]:[bettercap]\n[2]:[toolname]\n[3]:[toolname]\n[4]:[toolname]\n[5]:[toolname]\n[6]:[toolname]\n[7]:[...]\n[8]:[...]\n[9]:[...]\n[10]:[...]\n\n[x]:[Exit]\n").lower()
         click.echo()
 
         if reply == "1":
