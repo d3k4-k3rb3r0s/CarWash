@@ -10,7 +10,7 @@ Research/RedTeamers tool to automate the Wash>Reaver(pixiedust)>* workflow with 
 
 **[How does it]:**
 
-CarWash prompts for operator readiness then checks the available interfaces and prompts for a choice. It then stops dhcpcd, removes all rfkill blockages, uses airmon-ng to put the selected interface in monitor mode. CarWash then runs the t6x fork of Wash to scan for WPS enabled AP's and sorts them by signal strength. Next these AP's are attacked in order of signal strength with the ability for the operator to skip through the list. It logs pwned AP's and prints them when done running the sorted list. It then prompts for restart. If restart is denied by operator, it prompts to reset network config and adapter mode. If operator confirms CarWash will reset dhcpcd and restor the adapter from monitor mode, then prompt operator to launch another tool, likely a post connection tool like bettercap, while exiting CarWash. 
+CarWash prompts for operator readiness then checks the available interfaces and prompts for a choice. It then stops dhcpcd, removes all rfkill blockages, uses airmon-ng to put the selected interface in monitor mode. CarWash then runs the t6x fork of Wash to scan for WPS enabled AP's and sorts them by signal strength. Next these AP's are attacked in order of signal strength with the ability for the operator to skip through the list. It logs pwned AP's and prints them when done running the sorted list. It then prompts for restart. If restart is denied by operator, it prompts to reset network config and adapter mode. If operator confirms CarWash will reset dhcpcd and restore the adapter from monitor mode, then prompt operator to launch another tool, likely a post connection tool like bettercap, while exiting CarWash. 
 
 **[Requires it]:**
 
@@ -31,7 +31,7 @@ CarWash prompts for operator readiness then checks the available interfaces and 
 **[Use it]:**
   ```
   cd CarWash
-  sudo python3 Carwash* [options]
+  sudo python3 Carwash.py [options]
   ```
 ![usage](carwash_usage.jpg)
 
