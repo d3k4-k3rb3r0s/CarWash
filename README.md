@@ -53,13 +53,14 @@ CarWash prompts for operator readiness then checks the available interfaces and 
 ## [To Do Lists]
 
 ### [Essential]:
+ - Add MacChanger to the setup cycle.
  - Fix "traffic_report.csv" write format. (currently writes all data to one column of csv.)
  - Add GPS functionality.
  - Add option to convert traffic_tickets.csv" to a google-mappable KML file.
   
 ### [Nice Ideas]:
- - Add the functionality of choosing which AP's from the list to attack, and then transfer the harvest WPS PIN & WPA PSK to another tool for immediate usage, CarWash is 
-   designed to be like a war-driving tool. It isn't meant to be used for tightly targeted precision attacks. So this may actually be a separate tool.
+ - Add the functionality of choosing which AP's from the list to attack, and then transfer the harvested WPS PIN & WPA PSK to another tool for immediate use, CarWash is 
+   designed to be like a war-driving tool. It isn't meant to be used for tightly targeted precision attacks. So this may actually become a separate but related tool.
  - Add option flags to pass certain reaver and wash flags, making it more versatile.
  - Write a smaller version that can run headless, or with a pwnagotchi style display & pimoroni button shim.
 
