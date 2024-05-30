@@ -23,6 +23,12 @@ CarWash prompts for operator readiness then checks the available interfaces and 
   make
   sudo make install
   ```
+[aircrack-ng](https://github.com/aircrack-ng/aircrack-ng)
+  ```
+  sudo apt install aircrack-ng
+
+  ```
+
 
 **[Install it]:**
   ```
@@ -53,6 +59,7 @@ CarWash prompts for operator readiness then checks the available interfaces and 
 ## [To Do Lists]
 
 ### [Essential]:
+ - Add config file to manipulate default interfaces, timeouts, and maybe some other things.
  - Add MacChanger to the setup cycle.
  - Fix "traffic_report.csv" write format. (currently writes all data to one column of csv.)
  - Add GPS functionality.
