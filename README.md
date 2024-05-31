@@ -54,6 +54,7 @@ CarWash prompts for operator readiness then checks the available interfaces and 
   - Fixed the issue with all AP rows from `traffic_report.csv` being written to `traffic_tickets.csv`.
   - Fixed the error with the --help call.
   - Random miscellaneus typos and grammar errors fixed as well as output formatting and modification/update of the ascii CarWash image.
+  - Random miscellaneus typos and grammar errors fixed as well as output formatting and modification/update of the ascii CarWash image.
 
 
 ## [To Do Lists]
