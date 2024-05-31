@@ -14,6 +14,12 @@ CarWash prompts for operator readiness then checks the available interfaces and 
 
 **[Requires it]:**
 
+[aircrack-ng](https://github.com/aircrack-ng/aircrack-ng)
+  ```
+  sudo apt install aircrack-ng
+
+  ```
+
 [t6x Reaver](https://github.com/t6x/reaver-wps-fork-t6x)
   ```
   git clone https://github.com/t6x/reaver-wps-fork-t6x.git
@@ -23,21 +29,16 @@ CarWash prompts for operator readiness then checks the available interfaces and 
   make
   sudo make install
   ```
-[aircrack-ng](https://github.com/aircrack-ng/aircrack-ng)
-  ```
-  sudo apt install aircrack-ng
-
-  ```
 
 
 **[Install it]:**
   ```
   git clone https://github.com/d3k4-k3rb3r0s/CarWash.git
+  sudo bash setup.sh
   ```
 **[Use it]:**
   ```
-  cd CarWash
-  sudo python3 Carwash.py [options]
+  sudo Carwash [options]
   ```
 ![usage](carwash_usage.jpg)
 
@@ -54,6 +55,11 @@ CarWash prompts for operator readiness then checks the available interfaces and 
   - Fixed the issue with all AP rows from `traffic_report.csv` being written to `traffic_tickets.csv`.
   - Fixed the error with the --help call.
   - Random miscellaneus typos and grammar errors fixed as well as output formatting and modification/update of the ascii CarWash image.
+### [CarWash]:[v]:[1.0.4]
+  - Re-arranged some things and included `__init__.py`, a `CarWash` subdirectory for it, et cetera for python packaging purposes.
+  - Added `setup.py` to handle python packaging. PLease report any errors as I have a limited ability/desire to test install across various systems. Isssues and pull requests welcome.
+  - Added `setup.sh`, an interactive BASh script to walk you through setting up system dependencies for the tools CarWash uses. PLease report any errors as I have a limited ability/desire to test install across various systems. Isssues and pull requests welcome.
+  - Updated install instructions to reflect these changes.
   - Random miscellaneus typos and grammar errors fixed as well as output formatting and modification/update of the ascii CarWash image.
 
 
