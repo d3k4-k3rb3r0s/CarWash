@@ -190,7 +190,7 @@ def print_traffic_ticket():
             ap_info = list(reader)
             valid_entries = [ap for ap in ap_info if ap["WPA PSK"]]
             if valid_entries:
-                click.echo("\n[+]:[v]:[Traffic Tickets]:[v]")
+                click.echo("\n[+]:[↓]:[Traffic Tickets]:[↓]")
                 click.echo()
                 # Adjust the column widths here (e.g., change 20 to a lower value)
                 click.echo("{:<4} {:<20} {:<25} {:<14} {:<18}".format("No.", "BSSID", "ESSID", "WPS PIN", "WPA PSK"))
@@ -376,7 +376,7 @@ def carwash(interface, tickets):
     # Log the AP list
     ap_list = log_ap_list(existing_data)
 
-    click.echo("\n[+]:[Washable Traffic:]")
+    click.echo("\n[+]:[↓]:[Washable Traffic:]:[↓]")
     time.sleep(1)    
     click.echo("{:<4} {:<18} {:<30} {:<8} {:<16}".format("No.", "BSSID", "ESSID", "Chan", "dBm"))
 
