@@ -286,23 +286,23 @@ def open_tool():
             break
         elif reply == "6":
             click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            subprocess.Popen(["command+path"])
             break
         elif reply == "7":
             click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            subprocess.Popen(["command+path"])
             break
         elif reply == "8":
             click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            subprocess.Popen(["command+path"])
             break
         elif reply == "9":
             click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            subprocess.Popen(["command+path"])
             break
         elif reply == "10":
             click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            subprocess.Popen(["command+path"])
             break
         elif reply == "x":
             click.echo("\n[-]:[d3k4t3ss3r4:]:[Thanks for rolling to the CarWash.]\n")
