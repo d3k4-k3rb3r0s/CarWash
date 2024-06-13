@@ -286,7 +286,7 @@ def open_tool():
             break
         elif reply == "6":
             click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
-            toolname_process = subprocess.Popen(["command+path"])
+            subprocess.Popen(["command+path"])
             break
         elif reply == "7":
             click.echo(f"\n[+]:[{hostname}]:[Arming and deploying toolname...]")
