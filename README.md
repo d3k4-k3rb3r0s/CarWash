@@ -24,7 +24,7 @@ sudo apt update && sudo apt install macchanger
 
 [aircrack-ng](https://github.com/aircrack-ng/aircrack-ng)
   ```
-  sudo apt updte && sudo apt install aircrack-ng
+  sudo apt update && sudo apt install aircrack-ng
 
   ```
 
