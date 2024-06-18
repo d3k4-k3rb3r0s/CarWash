@@ -15,9 +15,9 @@ CarWash prompts for operator readiness then checks the available interfaces and 
 **[Requires it]:**
 
 [macchanger](https://github.com/alobbs/macchanger)
-```
-sudo apt update && sudo apt install macchanger
-```
+  ```
+  sudo apt update && sudo apt install macchanger
+  ```
 
 
 
@@ -26,6 +26,15 @@ sudo apt update && sudo apt install macchanger
   ```
   sudo apt update && sudo apt install aircrack-ng
 
+  ```
+
+[pixiewps](https://github.com/wiire-a/pixiewps)
+  ```
+  git clone https://github.com/wiire/pixiewps
+  cd pixiewps*/
+  make
+  make OPENSSL=1
+  sudo make install
   ```
 
 [t6x Reaver](https://github.com/t6x/reaver-wps-fork-t6x)
